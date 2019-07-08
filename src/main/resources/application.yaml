@@ -1,0 +1,18 @@
+spring:
+  profiles:
+    active: local
+  application:
+    name: shopping_cart
+  main:
+    allow-bean-definition-overriding: true
+  datasource:
+    hikari:
+      initialization-fail-timeout: -1
+    url: jdbc:postgresql://localhost:5432/shopping_cart
+    password: Sh0ppingC4art!
+    username: shopping_cart
+    driver-class-name: org.postgresql.Driver
+  jackson:
+    serialization:
+      write-dates-as-timestamps: false
+      WRITE_DATES_AS_TIMESTAMPS: false

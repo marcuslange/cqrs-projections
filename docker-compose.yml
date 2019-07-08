@@ -1,0 +1,15 @@
+version: '3.7'
+services:
+  postgres:
+    image: "postgres:10.4-alpine"
+    restart: always
+    ports:
+      - "5432:5432"
+    environment:
+      - "POSTGRES_PASSWORD=Sh0ppingC4art"
+      - "POSTGRES_USER=shopping_cart"
+      - "POSTGRES_DB=shopping_cart"
+    networks:
+      - shopping-cart
+networks:
+  shopping-cart:
