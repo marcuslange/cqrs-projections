@@ -4,13 +4,19 @@ import io.pileworx.cqrs.projections.domain.ShoppingCart;
 import io.pileworx.cqrs.projections.domain.ShoppingCartRepository;
 import io.pileworx.cqrs.projections.domain.cart.ShoppingCartId;
 
+import javax.inject.Inject;
 import javax.inject.Named;
 import java.util.*;
 
 @Named
 public class ShoppingCartRepositoryInMemory implements ShoppingCartRepository {
 
-    private final Map<String, ShoppingCart> carts = new HashMap<>();
+    private final Map<String, ShoppingCart> carts;
+
+    @Inject
+    public ShoppingCartRepositoryInMemory(Map<String, ShoppingCart> carts) {
+        this.carts = carts;
+    }
 
     @Override
     public ShoppingCartId nextId() {
