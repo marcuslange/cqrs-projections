@@ -9,7 +9,7 @@ spring:
     hikari:
       initialization-fail-timeout: -1
     url: jdbc:postgresql://localhost:5432/shopping_cart
-    password: Sh0ppingC4art!
+    password: Sh0ppingC4art
     username: shopping_cart
     driver-class-name: org.postgresql.Driver
   jackson:

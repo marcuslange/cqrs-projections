@@ -34,8 +34,8 @@ public class ShoppingCartFinderInMemory implements ShoppingCartFinder {
 
     @Override
     public Optional<ShoppingCartDto> findById(ShoppingCartId id) {
-        return carts.containsKey(id.value())
-                ? Optional.of(assembler.toDto(carts.get(id.value())))
+        return carts.containsKey(id.getValue())
+                ? Optional.of(assembler.toDto(carts.get(id.getValue())))
                 : Optional.empty();
     }
 

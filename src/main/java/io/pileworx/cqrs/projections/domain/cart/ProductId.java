@@ -21,7 +21,12 @@ public class ProductId implements Identity<String> {
 
     @Override
     @JsonProperty("value")
-    public String value() {
+    public String getValue() {
         return id.toString();
+    }
+
+    @Override
+    public String toString() {
+        return getValue();
     }
 }
