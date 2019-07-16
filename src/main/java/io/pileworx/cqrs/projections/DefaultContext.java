@@ -34,7 +34,7 @@ public class DefaultContext {
     public List<PersistenceStrategy<ShoppingCart, ShoppingCartId>> shoppingCartPersistenceStrategies(NamedParameterJdbcTemplate jdbcTemplate, JsonRowMapper<ShoppingCart, ShoppingCartJackson> rowMapper) {
         return List.of(
                 new DomainPersistenceStrategy(jdbcTemplate, rowMapper),
-                new ProjectionPersistenceStrategy(jdbcTemplate),
-                new BombPersistenceStrategy());
+                new ProjectionPersistenceStrategy(jdbcTemplate));
+                //new BombPersistenceStrategy());
     }
 }

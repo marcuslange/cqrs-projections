@@ -25,4 +25,8 @@ public class ShoppingCartDto {
         this.lineItems = lineItems;
         this.subtotal = subtotal;
     }
+
+    public void addLineItem(LineItemDto lineItem) {
+        lineItems.add(lineItem);
+    }
 }

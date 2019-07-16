@@ -14,7 +14,6 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-@Named
 public class ShoppingCartFinderInMemory implements ShoppingCartFinder {
 
     private final Map<String, ShoppingCart> carts;

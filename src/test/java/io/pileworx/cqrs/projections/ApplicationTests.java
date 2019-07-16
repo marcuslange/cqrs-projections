@@ -36,7 +36,8 @@ public class ApplicationTests {
 	@Test
 	public void canFindByProductName() {
 		shoppingCartService.createCart(createCartCmd());
-		var cartDtos = shoppingCartService.findByProductName("gizmo");
+
+		var cartDtos = shoppingCartService.findByProductName("Gizmo");
 
 		assertThat(cartDtos.size(), is(greaterThan(0)));
 	}
