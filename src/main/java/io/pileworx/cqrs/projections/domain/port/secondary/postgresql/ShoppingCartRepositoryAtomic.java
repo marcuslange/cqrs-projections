@@ -29,7 +29,7 @@ public class ShoppingCartRepositoryAtomic extends StrategyRepository<ShoppingCar
 
     @Inject
     public ShoppingCartRepositoryAtomic(List<PersistenceStrategy<ShoppingCart, ShoppingCartId>> persistenceStrategies,
-                                        NamedParameterJdbcTemplate jdbcTemplate,
+                                        @Named("domainJdbcTemplate") NamedParameterJdbcTemplate jdbcTemplate,
                                         JsonRowMapper<ShoppingCart, ShoppingCartJackson> rowMapper) {
         super(persistenceStrategies);
         this.jdbcTemplate = jdbcTemplate;

@@ -1,10 +1,21 @@
 version: '3.7'
 services:
-  postgres:
+  postgres-domain:
     image: "postgres:10.7-alpine"
     restart: always
     ports:
       - "5432:5432"
+    environment:
+      - "POSTGRES_PASSWORD=Sh0ppingC4art"
+      - "POSTGRES_USER=shopping_cart"
+      - "POSTGRES_DB=shopping_cart"
+    networks:
+      - shopping-cart
+  postgres-projection:
+    image: "postgres:10.7-alpine"
+    restart: always
+    ports:
+      - "5433:5432"
     environment:
       - "POSTGRES_PASSWORD=Sh0ppingC4art"
       - "POSTGRES_USER=shopping_cart"

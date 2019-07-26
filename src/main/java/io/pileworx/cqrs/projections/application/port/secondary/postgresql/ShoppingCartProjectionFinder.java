@@ -19,7 +19,7 @@ public class ShoppingCartProjectionFinder implements ShoppingCartFinder {
     private final ShoppingCartResultSetExtractor extractor;
 
     @Inject
-    public ShoppingCartProjectionFinder(NamedParameterJdbcTemplate jdbcTemplate,
+    public ShoppingCartProjectionFinder(@Named("projectionJdbcTemplate") NamedParameterJdbcTemplate jdbcTemplate,
                                         ShoppingCartResultSetExtractor extractor) {
         this.jdbcTemplate = jdbcTemplate;
         this.extractor = extractor;
