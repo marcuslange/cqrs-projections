@@ -5,6 +5,8 @@ spring:
     name: shopping_cart
   main:
     allow-bean-definition-overriding: true
+  flyway:
+    enabled: false
   ds-domain:
     hikari:
       initialization-fail-timeout: -1

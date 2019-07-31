@@ -8,7 +8,6 @@ import io.pileworx.cqrs.projections.domain.cart.ShoppingCartId;
 import io.pileworx.cqrs.projections.domain.cart.ShoppingCartJackson;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 
-import javax.inject.Inject;
 import java.util.Map;
 import java.util.Objects;
 
@@ -16,7 +15,6 @@ public class ProjectionPersistenceStrategy implements PersistenceStrategy<Shoppi
 
     private final NamedParameterJdbcTemplate jdbcTemplate;
 
-    @Inject
     public ProjectionPersistenceStrategy(NamedParameterJdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
     }
@@ -32,9 +30,7 @@ public class ProjectionPersistenceStrategy implements PersistenceStrategy<Shoppi
     }
 
     @Override
-    public void delete(ShoppingCartId id) {
-
-    }
+    public void delete(ShoppingCartId id) {}
 
     private void create(ShoppingCart ar) {
         var cart = (ShoppingCartJackson) ar;

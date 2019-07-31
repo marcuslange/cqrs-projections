@@ -12,13 +12,16 @@ import io.pileworx.cqrs.projections.domain.port.secondary.postgresql.strategy.Do
 import io.pileworx.cqrs.projections.domain.port.secondary.postgresql.strategy.ProjectionPersistenceStrategy;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceProperties;
 import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
+import org.springframework.data.transaction.ChainedTransactionManager;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.jdbc.datasource.DataSourceTransactionManager;
+import org.springframework.transaction.PlatformTransactionManager;
+
 import javax.sql.DataSource;
 import java.util.HashMap;
 import java.util.List;
@@ -62,6 +65,11 @@ public class DefaultContext {
         return domainDataSourceProperties().initializeDataSourceBuilder().type(HikariDataSource.class).build();
     }
 
+    @Bean(name = "domainTransactionManager")
+    public DataSourceTransactionManager domainTransactionManager(@Qualifier("domainDataSource") DataSource domainDataSource) {
+        return new DataSourceTransactionManager(domainDataSource);
+    }
+
     @Bean(name = "domainJdbcTemplate")
     public NamedParameterJdbcTemplate domainJdbcTemplate(@Qualifier("domainDataSource") DataSource domainDataSource) {
         return new NamedParameterJdbcTemplate(domainDataSource);
@@ -75,12 +83,25 @@ public class DefaultContext {
 
     @Bean(name = "projectionDataSource")
     @ConfigurationProperties(prefix = "spring.ds-projection.hikari")
-    public DataSource postgresDataSource() {
+    public DataSource projectionDataSource() {
         return  projectionDataSourceProperties().initializeDataSourceBuilder().type(HikariDataSource.class).build();
+    }
+
+    @Bean(name = "projectionTransactionManager")
+    public DataSourceTransactionManager projectionTransactionManager(@Qualifier("projectionDataSource") DataSource projectionDataSource) {
+        return new DataSourceTransactionManager(projectionDataSource);
     }
 
     @Bean(name = "projectionJdbcTemplate")
     public NamedParameterJdbcTemplate projectionJdbcTemplate(@Qualifier("projectionDataSource") DataSource projectionDataSource) {
         return new NamedParameterJdbcTemplate(projectionDataSource);
+    }
+
+    @Bean(name = "chainedTransactionManager")
+    public ChainedTransactionManager transactionManager(@Qualifier("domainTransactionManager") PlatformTransactionManager domainTransactionManager,
+                                                        @Qualifier("projectionTransactionManager") PlatformTransactionManager projectionTransactionManager) {
+        return new ChainedTransactionManager(
+                domainTransactionManager,
+                projectionTransactionManager);
     }
 }

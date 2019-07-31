@@ -16,13 +16,13 @@ public abstract class StrategyRepository<T extends AggregateRoot<I>, I extends I
     }
 
     @Override
-    @Transactional
+    @Transactional(transactionManager = "chainedTransactionManager")
     public void save(T ar) {
         strategies.forEach(s -> s.save(ar));
     }
 
     @Override
-    @Transactional
+    @Transactional(transactionManager = "chainedTransactionManager")
     public void delete(I id) {
         strategies.forEach(s -> s.delete(id));
     }

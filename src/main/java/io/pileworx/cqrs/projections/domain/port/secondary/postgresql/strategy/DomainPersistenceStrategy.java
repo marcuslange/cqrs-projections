@@ -7,7 +7,6 @@ import io.pileworx.cqrs.projections.domain.cart.ShoppingCartJackson;
 import io.pileworx.cqrs.projections.domain.port.secondary.postgresql.rowmapper.JsonRowMapper;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 
-import javax.inject.Inject;
 import java.util.Map;
 import java.util.Objects;
 
@@ -18,7 +17,6 @@ public class DomainPersistenceStrategy implements PersistenceStrategy<ShoppingCa
     private final NamedParameterJdbcTemplate jdbcTemplate;
     private final JsonRowMapper<ShoppingCart, ShoppingCartJackson> rowMapper;
 
-    @Inject
     public DomainPersistenceStrategy(NamedParameterJdbcTemplate jdbcTemplate,
                                      JsonRowMapper<ShoppingCart, ShoppingCartJackson> rowMapper) {
         this.jdbcTemplate = jdbcTemplate;
